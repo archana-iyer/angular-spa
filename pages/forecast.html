@@ -1,0 +1,57 @@
+<h3>Forecast for {{city}}, {{days}} Days Weather </h3><a href="#/" class="btn btn-primary btn-sm">Change Location</a>
+<hr />
+Days: <a href="#/forecast/2" ng-class="{ 'bg-primary': days === '2'}"> 2</a> |
+<a href="#/forecast/5" ng-class="{ 'bg-primary': days === '5'}"> 5</a> |
+<a href="#/forecast/7" ng-class="{ 'bg-primary': days === '7'}"> 7</a>
+<hr />
+<table class="table table-responsive table-striped">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col">
+        DAY
+      </th>
+      <th scope="col">
+        DESCRIPTION
+      </th>
+      <th scope="col">
+        HIGH / LOW
+      </th>
+      <th scope="col">
+        PRECIPITATION
+      </th>
+      <th scope="col">
+        WIND
+      </th>
+      <th scope="col">
+        HUMIDITY
+      </th>
+    </tr>
+  </thead>
+  <!-- <weather-report weather-day="w" convert-to-standard="convertToFahrenheit(temp)" date-format="fullDate", description="w.weather.description", high-temp="w.high">
+
+  </weather-report> -->
+  <tbody ng-repeat="w in weatherResult.data">
+    <tr>
+      <th scope="row">
+        {{ w.datetime | date: 'EEEE, MMM d, y'}}
+      </th>
+      <td>
+        <i ng-class="{'fa fa-cloud' : w.weather.description.indexOf('clouds') > -1, 'fa fa-sun-o': w.weather.description.indexOf('sun') > -1, 'fa fa-umbrella': w.weather.description.indexOf('rain') > -1, 'fa fa-moon-o': w.weather.description.indexOf('Clear sky') > -1 }" aria-hidden="true"></i> {{ w.weather.description }}
+      </td>
+      <td>
+        {{ convertToFahrenheit(w.max_temp) }} / {{ convertToFahrenheit(w.min_temp) }}
+      </td>
+      <td>
+        <i class="fa fa-tint" aria-hidden="true"></i> {{ w.precip }}%
+      </td>
+      <td>
+        {{ w.wind_cdir }} / {{ convertToMph(w.wind_spd) }}mph
+      </td>
+      <td>
+        {{ w.rh }}%
+      </td>
+    </tr>
+
+  </tbody>
+
+</table>
